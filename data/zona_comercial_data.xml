@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Las 18 zonas salen de la columna Zona de "Visitas Comerciales.xlsx"
+         (registro de jun-2025 a ago-2026). Se respeta el nombre EXACTO que usan
+         ellos, para que el histórico machee 1:1 y para no imponerles otra
+         nomenclatura. La secuencia ordena por volumen de visitas del período.
+         noupdate="1": pueden renombrarlas o agregar sin que un upgrade las pise. -->
+    <data noupdate="1">
+
+        <!-- 631 visitas en el período -->
+        <record id="zona_mendoza" model="surtecnica.zona.comercial">
+            <field name="name">Mendoza</field>
+            <field name="sequence">10</field>
+        </record>
+
+        <!-- 216 visitas en el período -->
+        <record id="zona_nquen_y_r_n" model="surtecnica.zona.comercial">
+            <field name="name">Nquen y R. N</field>
+            <field name="sequence">20</field>
+        </record>
+
+        <!-- 214 visitas en el período -->
+        <record id="zona_valle_de_uco" model="surtecnica.zona.comercial">
+            <field name="name">Valle de Uco</field>
+            <field name="sequence">30</field>
+        </record>
+
+        <!-- 202 visitas en el período -->
+        <record id="zona_cordoba_y_villa_mercedes" model="surtecnica.zona.comercial">
+            <field name="name">Córdoba y Villa Mercedes</field>
+            <field name="sequence">40</field>
+        </record>
+
+        <!-- 103 visitas en el período -->
+        <record id="zona_san_juan" model="surtecnica.zona.comercial">
+            <field name="name">San Juan</field>
+            <field name="sequence">50</field>
+        </record>
+
+        <!-- 61 visitas en el período -->
+        <record id="zona_buenos_aires" model="surtecnica.zona.comercial">
+            <field name="name">Buenos Aires</field>
+            <field name="sequence">60</field>
+        </record>
+
+        <!-- 44 visitas en el período -->
+        <record id="zona_noa" model="surtecnica.zona.comercial">
+            <field name="name">NOA</field>
+            <field name="sequence">70</field>
+        </record>
+
+        <!-- 42 visitas en el período -->
+        <record id="zona_la_rioja" model="surtecnica.zona.comercial">
+            <field name="name">La Rioja</field>
+            <field name="sequence">80</field>
+        </record>
+
+        <!-- 40 visitas en el período -->
+        <record id="zona_santa_fe_y_e_rios" model="surtecnica.zona.comercial">
+            <field name="name">Santa Fe y E.Rios</field>
+            <field name="sequence">90</field>
+        </record>
+
+        <!-- 31 visitas en el período -->
+        <record id="zona_catamarca" model="surtecnica.zona.comercial">
+            <field name="name">Catamarca</field>
+            <field name="sequence">100</field>
+        </record>
+
+        <!-- 17 visitas en el período -->
+        <record id="zona_chilecito_la_rioja" model="surtecnica.zona.comercial">
+            <field name="name">Chilecito La Rioja</field>
+            <field name="sequence">110</field>
+        </record>
+
+        <!-- 16 visitas en el período -->
+        <record id="zona_lavalle" model="surtecnica.zona.comercial">
+            <field name="name">Lavalle</field>
+            <field name="sequence">120</field>
+        </record>
+
+        <!-- 16 visitas en el período -->
+        <record id="zona_san_luis" model="surtecnica.zona.comercial">
+            <field name="name">San Luis</field>
+            <field name="sequence">130</field>
+        </record>
+
+        <!-- 14 visitas en el período -->
+        <record id="zona_poman" model="surtecnica.zona.comercial">
+            <field name="name">Poman</field>
+            <field name="sequence">140</field>
+        </record>
+
+        <!-- 11 visitas en el período -->
+        <record id="zona_la_rioja_capital" model="surtecnica.zona.comercial">
+            <field name="name">La Rioja Capital</field>
+            <field name="sequence">150</field>
+        </record>
+
+        <!-- 10 visitas en el período -->
+        <record id="zona_aimogasta" model="surtecnica.zona.comercial">
+            <field name="name">Aimogasta</field>
+            <field name="sequence">160</field>
+        </record>
+
+        <!-- 6 visitas en el período -->
+        <record id="zona_nonogasta" model="surtecnica.zona.comercial">
+            <field name="name">Nonogasta</field>
+            <field name="sequence">170</field>
+        </record>
+
+        <!-- 5 visitas en el período -->
+        <record id="zona_santa_cruz_pm_y_tre" model="surtecnica.zona.comercial">
+            <field name="name">Santa Cruz, PM y Tre</field>
+            <field name="sequence">180</field>
+        </record>
+
+    </data>
+</odoo>

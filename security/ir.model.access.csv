@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_zona_comercial_user,surtecnica.zona.comercial.user,model_surtecnica_zona_comercial,base.group_user,1,0,0,0
+access_zona_comercial_manager,surtecnica.zona.comercial.manager,model_surtecnica_zona_comercial,sales_team.group_sale_manager,1,1,1,1

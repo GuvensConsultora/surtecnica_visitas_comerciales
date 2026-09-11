@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Cuelga de CRM porque ahí ya trabajan (5.181 oportunidades). Menú propio y no
+         dentro de Calendario, para que las visitas no se mezclen con la agenda general. -->
+    <menuitem id="menu_visitas_comerciales"
+              name="Visitas comerciales"
+              parent="crm.crm_menu_root"
+              action="action_visitas_comerciales"
+              sequence="15"/>
+
+    <menuitem id="menu_zonas_comerciales"
+              name="Zonas comerciales"
+              parent="crm.crm_menu_config"
+              action="action_zonas_comerciales"
+              sequence="30"/>
+
+</odoo>

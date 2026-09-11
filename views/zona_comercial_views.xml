@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_zona_comercial_tree" model="ir.ui.view">
+        <field name="name">surtecnica.zona.comercial.tree</field>
+        <field name="model">surtecnica.zona.comercial</field>
+        <field name="arch" type="xml">
+            <!-- editable: mantener el catálogo no debería costar abrir un formulario. -->
+            <tree string="Zonas comerciales" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="state_id" optional="show"/>
+                <field name="partner_count" string="Clientes"/>
+                <field name="note" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_zona_comercial_form" model="ir.ui.view">
+        <field name="name">surtecnica.zona.comercial.form</field>
+        <field name="model">surtecnica.zona.comercial</field>
+        <field name="arch" type="xml">
+            <form string="Zona comercial">
+                <sheet>
+                    <widget name="web_ribbon" title="Archivada" bg_color="text-bg-danger"
+                            invisible="active"/>
+                    <field name="active" invisible="1"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Valle de Uco"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="state_id"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="partner_count"/>
+                            <field name="note"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Clientes de la zona" name="clientes">
+                            <field name="partner_ids" readonly="1">
+                                <tree>
+                                    <field name="display_name" string="Cliente"/>
+                                    <field name="city" optional="show"/>
+                                    <field name="user_id" string="Comercial" optional="show"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_zonas_comerciales" model="ir.actions.act_window">
+        <field name="name">Zonas comerciales</field>
+        <field name="res_model">surtecnica.zona.comercial</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Definí las zonas</p>
+            <p>La zona se carga una vez en cada cliente y las visitas la heredan solas.</p>
+        </field>
+    </record>
+
+</odoo>

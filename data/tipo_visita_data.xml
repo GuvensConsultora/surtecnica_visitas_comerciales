@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Los cuatro tipos que ya usan en la planilla. calendar.event.type es nativo y
+         estaba vacío en la instancia, así que se aprovecha en vez de crear un modelo.
+         noupdate="1": si renombran o agregan tipos, un upgrade del módulo no los pisa. -->
+    <data noupdate="1">
+
+        <record id="tipo_visita_reunion" model="calendar.event.type">
+            <field name="name">Reunión</field>
+        </record>
+
+        <record id="tipo_visita_contacto" model="calendar.event.type">
+            <field name="name">Contacto</field>
+        </record>
+
+        <record id="tipo_visita_llamado" model="calendar.event.type">
+            <field name="name">Llamado</field>
+        </record>
+
+        <record id="tipo_visita_video_llamada" model="calendar.event.type">
+            <field name="name">Video llamada</field>
+        </record>
+
+    </data>
+</odoo>

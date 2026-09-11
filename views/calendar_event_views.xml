@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Formulario CORTO. El nativo de calendar.event trae recurrencia, invitaciones,
+         videollamada y alarmas: todo ruido para quien vuelve de visitar un cliente.
+         Acá se carga cliente, fecha y tipo, y ya está. -->
+    <record id="view_visita_comercial_form" model="ir.ui.view">
+        <field name="name">calendar.event.form.visita.comercial</field>
+        <field name="model">calendar.event</field>
+        <field name="priority">32</field>
+        <field name="arch" type="xml">
+            <form string="Visita comercial">
+                <sheet>
+                    <field name="es_visita_comercial" invisible="1"/>
+                    <group>
+                        <group>
+                            <field name="cliente_id"
+                                   required="1"
+                                   options="{'no_create_edit': True}"/>
+                            <field name="tipo_visita_id" options="{'no_create_edit': True}"/>
+                            <field name="zona_comercial_id" options="{'no_create_edit': True}"/>
+                        </group>
+                        <group>
+                            <field name="start"
+                                   widget="daterange"
+                                   options="{'end_date_field': 'stop'}"
+                                   string="Fecha"/>
+                            <field name="duration" widget="float_time"/>
+                            <field name="user_id" string="Comercial"/>
+                            <field name="opportunity_id"
+                                   string="Oportunidad"
+                                   options="{'no_create_edit': True}"/>
+                        </group>
+                    </group>
+                    <field name="name" invisible="1"/>
+                    <field name="description"
+                           placeholder="Qué se habló, qué quedó pendiente..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_visita_comercial_tree" model="ir.ui.view">
+        <field name="name">calendar.event.tree.visita.comercial</field>
+        <field name="model">calendar.event</field>
+        <field name="priority">32</field>
+        <field name="arch" type="xml">
+            <tree string="Visitas comerciales" sample="1">
+                <field name="start" string="Fecha"/>
+                <field name="user_id" string="Comercial"/>
+                <field name="cliente_id"/>
+                <field name="zona_comercial_id"/>
+                <field name="tipo_visita_id"/>
+                <field name="opportunity_id" optional="hide"/>
+                <field name="es_visita_comercial" column_invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Reemplaza la hoja "Resumen de visitas": las mismas cifras salen de acá,
+         agrupando por comercial y mes, sin COUNTIFS que arrastrar ni rangos que corregir. -->
+    <record id="view_visita_comercial_pivot" model="ir.ui.view">
+        <field name="name">calendar.event.pivot.visita.comercial</field>
+        <field name="model">calendar.event</field>
+        <field name="arch" type="xml">
+            <pivot string="Visitas por comercial" sample="1">
+                <field name="user_id" type="row"/>
+                <field name="start" interval="month" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_visita_comercial_graph" model="ir.ui.view">
+        <field name="name">calendar.event.graph.visita.comercial</field>
+        <field name="model">calendar.event</field>
+        <field name="arch" type="xml">
+            <graph string="Visitas por comercial" type="bar" sample="1">
+                <field name="user_id" type="row"/>
+                <field name="start" interval="month" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_visita_comercial_search" model="ir.ui.view">
+        <field name="name">calendar.event.search.visita.comercial</field>
+        <field name="model">calendar.event</field>
+        <field name="arch" type="xml">
+            <search string="Visitas comerciales">
+                <field name="cliente_id"/>
+                <field name="user_id" string="Comercial"/>
+                <field name="zona_comercial_id"/>
+                <field name="tipo_visita_id"/>
+                <filter name="mis_visitas" string="Mis visitas"
+                        domain="[('user_id', '=', uid)]"/>
+                <separator/>
+                <filter name="este_mes" string="Este mes"
+                        domain="[('start', '&gt;=', context_today().strftime('%Y-%m-01'))]"/>
+                <separator/>
+                <!-- Sin zona: la lista de trabajo para completar la dimensión que hoy
+                     no existe en Odoo. -->
+                <filter name="sin_zona" string="Sin zona"
+                        domain="[('zona_comercial_id', '=', False)]"/>
+                <group expand="1" string="Agrupar por">
+                    <filter name="group_comercial" string="Comercial"
+                            context="{'group_by': 'user_id'}"/>
+                    <filter name="group_zona" string="Zona"
+                            context="{'group_by': 'zona_comercial_id'}"/>
+                    <filter name="group_tipo" string="Tipo de visita"
+                            context="{'group_by': 'tipo_visita_id'}"/>
+                    <filter name="group_cliente" string="Cliente"
+                            context="{'group_by': 'cliente_id'}"/>
+                    <filter name="group_mes" string="Mes"
+                            context="{'group_by': 'start:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_visitas_comerciales" model="ir.actions.act_window">
+        <field name="name">Visitas comerciales</field>
+        <field name="res_model">calendar.event</field>
+        <field name="view_mode">tree,form,pivot,graph,calendar</field>
+        <field name="search_view_id" ref="view_visita_comercial_search"/>
+        <field name="domain">[('es_visita_comercial', '=', True)]</field>
+        <field name="context">{'default_es_visita_comercial': True}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Registrá la primera visita</p>
+            <p>Cada visita queda con su cliente, su zona y su tipo. El informe por
+               comercial y por mes se arma solo desde acá.</p>
+        </field>
+    </record>
+
+    <!-- Se fuerzan las vistas propias: si no, la acción toma el form nativo de
+         calendar.event, que es el de agenda y no el corto. -->
+    <record id="action_visitas_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_visita_comercial_tree"/>
+        <field name="act_window_id" ref="action_visitas_comerciales"/>
+    </record>
+    <record id="action_visitas_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_visita_comercial_form"/>
+        <field name="act_window_id" ref="action_visitas_comerciales"/>
+    </record>
+    <record id="action_visitas_pivot" model="ir.actions.act_window.view">
+        <field name="sequence" eval="30"/>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="view_visita_comercial_pivot"/>
+        <field name="act_window_id" ref="action_visitas_comerciales"/>
+    </record>
+    <record id="action_visitas_graph" model="ir.actions.act_window.view">
+        <field name="sequence" eval="40"/>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_visita_comercial_graph"/>
+        <field name="act_window_id" ref="action_visitas_comerciales"/>
+    </record>
+
+</odoo>

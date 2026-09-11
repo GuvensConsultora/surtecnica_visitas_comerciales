@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_partner_form_visitas" model="ir.ui.view">
+        <field name="name">res.partner.form.visitas.comerciales</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Smart button: registrar la próxima visita desde la ficha que ya está
+                 mirando, con cliente y zona precargados. -->
+            <div name="button_box" position="inside">
+                <button name="action_ver_visitas"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-map-marker"
+                        invisible="not is_company and not customer_rank">
+                    <field name="visita_count" widget="statinfo" string="Visitas"/>
+                </button>
+            </div>
+
+            <field name="user_id" position="after">
+                <field name="zona_comercial_id" options="{'no_create_edit': True}"/>
+            </field>
+
+        </field>
+    </record>
+
+    <!-- Poder filtrar la cartera por zona, no sólo las visitas. -->
+    <record id="view_partner_search_visitas" model="ir.ui.view">
+        <field name="name">res.partner.search.zona.comercial</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="zona_comercial_id"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
