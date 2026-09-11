@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ===================== Resumen mensual (hoja "Resumen de visitas") ============ -->
+
+    <!-- Arranca como la hoja: comerciales en filas, meses en columnas, cantidad de
+         visitas. Las otras medidas (%, promedio, cumplimiento) se agregan desde
+         "Medidas" sin salir de la pantalla. -->
+    <record id="view_visita_resumen_pivot" model="ir.ui.view">
+        <field name="name">surtecnica.visita.resumen.pivot</field>
+        <field name="model">surtecnica.visita.resumen</field>
+        <field name="arch" type="xml">
+            <pivot string="Resumen de visitas" disable_linking="1" sample="1">
+                <field name="user_id" type="row"/>
+                <field name="mes" interval="month" type="col"/>
+                <field name="cantidad" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Mismo gráfico que el de la planilla: barras por comercial, mes a mes. -->
+    <record id="view_visita_resumen_graph" model="ir.ui.view">
+        <field name="name">surtecnica.visita.resumen.graph</field>
+        <field name="model">surtecnica.visita.resumen</field>
+        <field name="arch" type="xml">
+            <graph string="Visitas por comercial" type="bar" sample="1">
+                <field name="mes" interval="month" type="row"/>
+                <field name="user_id" type="col"/>
+                <field name="cantidad" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_visita_resumen_tree" model="ir.ui.view">
+        <field name="name">surtecnica.visita.resumen.tree</field>
+        <field name="model">surtecnica.visita.resumen</field>
+        <field name="arch" type="xml">
+            <!-- decoration-warning: meta cargada y no alcanzada. Además del color, la
+                 columna de cumplimiento dice el número, así no depende sólo del color. -->
+            <tree string="Resumen de visitas" create="0" edit="0" delete="0"
+                  decoration-warning="meta and cantidad &lt; meta">
+                <field name="mes" widget="date"/>
+                <field name="user_id"/>
+                <field name="cantidad" sum="Total"/>
+                <field name="participacion"/>
+                <field name="meta" optional="show"/>
+                <field name="cumplimiento" optional="show"/>
+                <field name="promedio" column_invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_visita_resumen_search" model="ir.ui.view">
+        <field name="name">surtecnica.visita.resumen.search</field>
+        <field name="model">surtecnica.visita.resumen</field>
+        <field name="arch" type="xml">
+            <search string="Resumen de visitas">
+                <field name="user_id" string="Comercial"/>
+                <filter name="este_anio" string="Este año"
+                        domain="[('mes', '&gt;=', context_today().strftime('%Y-01-01'))]"/>
+                <filter name="con_meta" string="Con meta cargada"
+                        domain="[('meta', '!=', False)]"/>
+                <filter name="bajo_meta" string="Debajo de la meta"
+                        domain="[('cumplimiento', '&lt;', 100)]"/>
+                <group expand="1" string="Agrupar por">
+                    <filter name="group_comercial" string="Comercial"
+                            context="{'group_by': 'user_id'}"/>
+                    <filter name="group_mes" string="Mes"
+                            context="{'group_by': 'mes:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_visita_resumen" model="ir.actions.act_window">
+        <field name="name">Resumen de visitas</field>
+        <field name="res_model">surtecnica.visita.resumen</field>
+        <field name="view_mode">pivot,graph,tree</field>
+        <field name="search_view_id" ref="view_visita_resumen_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">Todavía no hay visitas cargadas</p>
+            <p>El resumen se arma solo con las visitas del menú Visitas comerciales.</p>
+        </field>
+    </record>
+
+    <!-- ===================== Metas por comercial ===================================== -->
+
+    <record id="view_meta_visitas_tree" model="ir.ui.view">
+        <field name="name">surtecnica.meta.visitas.tree</field>
+        <field name="model">surtecnica.meta.visitas</field>
+        <field name="arch" type="xml">
+            <tree string="Metas de visitas" editable="bottom">
+                <field name="user_id" options="{'no_create': True}"/>
+                <field name="visitas_minimas"/>
+                <field name="active" column_invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_meta_visitas" model="ir.actions.act_window">
+        <field name="name">Metas de visitas</field>
+        <field name="res_model">surtecnica.meta.visitas</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Cargá la meta mensual de cada comercial</p>
+            <p>Con la meta cargada, el resumen muestra el cumplimiento de cada mes.</p>
+        </field>
+    </record>
+
+</odoo>

@@ -2,17 +2,36 @@
 <odoo>
 
     <!-- Cuelga de CRM porque ahí ya trabajan (5.181 oportunidades). Menú propio y no
-         dentro de Calendario, para que las visitas no se mezclen con la agenda general. -->
-    <menuitem id="menu_visitas_comerciales"
+         dentro de Calendario, para que las visitas no se mezclen con la agenda general.
+         Desde la 1.1 es un desplegable: la carga y el resumen, como las dos hojas de la
+         planilla. -->
+    <menuitem id="menu_visitas_root"
               name="Visitas comerciales"
               parent="crm.crm_menu_root"
-              action="action_visitas_comerciales"
               sequence="15"/>
+
+    <menuitem id="menu_visitas_comerciales"
+              name="Visitas"
+              parent="menu_visitas_root"
+              action="action_visitas_comerciales"
+              sequence="10"/>
+
+    <menuitem id="menu_visita_resumen"
+              name="Resumen de visitas"
+              parent="menu_visitas_root"
+              action="action_visita_resumen"
+              sequence="20"/>
 
     <menuitem id="menu_zonas_comerciales"
               name="Zonas comerciales"
               parent="crm.crm_menu_config"
               action="action_zonas_comerciales"
               sequence="30"/>
+
+    <menuitem id="menu_meta_visitas"
+              name="Metas de visitas"
+              parent="crm.crm_menu_config"
+              action="action_meta_visitas"
+              sequence="31"/>
 
 </odoo>

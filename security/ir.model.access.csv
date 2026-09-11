@@ -1,3 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_zona_comercial_user,surtecnica.zona.comercial.user,model_surtecnica_zona_comercial,base.group_user,1,0,0,0
 access_zona_comercial_manager,surtecnica.zona.comercial.manager,model_surtecnica_zona_comercial,sales_team.group_sale_manager,1,1,1,1
+access_meta_visitas_user,surtecnica.meta.visitas.user,model_surtecnica_meta_visitas,base.group_user,1,0,0,0
+access_meta_visitas_manager,surtecnica.meta.visitas.manager,model_surtecnica_meta_visitas,sales_team.group_sale_manager,1,1,1,1
+access_visita_resumen_user,surtecnica.visita.resumen.user,model_surtecnica_visita_resumen,base.group_user,1,0,0,0

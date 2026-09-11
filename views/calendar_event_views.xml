@@ -51,6 +51,7 @@
                 <field name="cliente_id"/>
                 <field name="zona_comercial_id"/>
                 <field name="tipo_visita_id"/>
+                <field name="description" string="Observaciones" optional="show"/>
                 <field name="opportunity_id" optional="hide"/>
                 <field name="es_visita_comercial" column_invisible="1"/>
             </tree>
