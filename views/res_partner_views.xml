@@ -17,15 +17,17 @@
                         invisible="not is_company and not customer_rank">
                     <field name="visita_count" widget="statinfo" string="Visitas"/>
                 </button>
+                <!-- El invisible del botón necesita customer_rank (de account) en la vista
+                     principal. Si depende de que otro módulo lo agregue, la actualización
+                     falla cuando este carga antes que ese módulo. -->
+                <field name="customer_rank" invisible="1"/>
             </div>
 
-            <field name="user_id" position="after">
+            <!-- Con el xpath: el primer user_id de la ficha es el del formulario de
+                 contactos hijos, y la zona terminaba adentro de ese sub-formulario. -->
+            <xpath expr="//page[@name='sales_purchases']//field[@name='user_id']" position="after">
                 <field name="zona_comercial_id" options="{'no_create_edit': True}"/>
-                <!-- Lo usa el invisible del botón Visitas. customer_rank es de account
-                     (por eso la dependencia): sin ella, al actualizar, este módulo carga
-                     antes que account y la vista falla por un campo que no está. -->
-                <field name="customer_rank" invisible="1"/>
-            </field>
+            </xpath>
 
         </field>
     </record>
