@@ -11,12 +11,12 @@ comerciales no se mezclen con la agenda general.
 
 El informe por comercial y mes sale de la vista pivot nativa: sin fórmulas que arrastrar.
     """,
-    "version": "17.0.1.1.1",
+    "version": "17.0.1.1.2",
     "author": "Yagüven C.G.",
     "website": "https://yaguven.com",
     "license": "LGPL-3",
     "category": "Sales/CRM",
-    "depends": ["calendar", "crm"],
+    "depends": ["calendar", "crm", "account"],
     "data": [
         "security/ir.model.access.csv",
         "data/tipo_visita_data.xml",

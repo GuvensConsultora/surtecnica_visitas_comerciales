@@ -21,6 +21,10 @@
 
             <field name="user_id" position="after">
                 <field name="zona_comercial_id" options="{'no_create_edit': True}"/>
+                <!-- Lo usa el invisible del botón Visitas. customer_rank es de account
+                     (por eso la dependencia): sin ella, al actualizar, este módulo carga
+                     antes que account y la vista falla por un campo que no está. -->
+                <field name="customer_rank" invisible="1"/>
             </field>
 
         </field>
