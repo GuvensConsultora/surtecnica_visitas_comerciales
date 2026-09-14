@@ -43,8 +43,10 @@
                 <field name="user_id"/>
                 <field name="cantidad" sum="Total"/>
                 <field name="participacion"/>
-                <field name="meta" optional="show"/>
-                <field name="cumplimiento" optional="show"/>
+                <!-- Sin meta cargada, el ORM lee el NULL como 0 y la fila parecería incumplida:
+                     la celda queda vacía. -->
+                <field name="meta" optional="show" invisible="not meta"/>
+                <field name="cumplimiento" optional="show" invisible="not meta"/>
                 <field name="promedio" column_invisible="1"/>
             </tree>
         </field>
