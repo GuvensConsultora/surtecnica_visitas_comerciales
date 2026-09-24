@@ -27,9 +27,11 @@
                                    string="Fecha"/>
                             <field name="duration" widget="float_time"/>
                             <field name="user_id" string="Comercial"/>
-                            <field name="opportunity_id"
-                                   string="Oportunidad"
-                                   options="{'no_create_edit': True}"/>
+                            <!-- Rubro en lugar de Oportunidad (pedido de comercial, 24/09/2026).
+                                 Se pueden crear rubros desde acá, sin ir a configuración. -->
+                            <field name="rubro_ids"
+                                   widget="many2many_tags"
+                                   options="{'color_field': 'color'}"/>
                         </group>
                     </group>
                     <field name="name" invisible="1"/>
@@ -51,8 +53,8 @@
                 <field name="cliente_id"/>
                 <field name="zona_comercial_id"/>
                 <field name="tipo_visita_id"/>
+                <field name="rubro_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                 <field name="description" string="Observaciones" optional="show"/>
-                <field name="opportunity_id" optional="hide"/>
                 <field name="es_visita_comercial" column_invisible="1"/>
             </tree>
         </field>
@@ -91,6 +93,7 @@
                 <field name="user_id" string="Comercial"/>
                 <field name="zona_comercial_id"/>
                 <field name="tipo_visita_id"/>
+                <field name="rubro_ids"/>
                 <filter name="mis_visitas" string="Mis visitas"
                         domain="[('user_id', '=', uid)]"/>
                 <separator/>
@@ -108,6 +111,8 @@
                             context="{'group_by': 'zona_comercial_id'}"/>
                     <filter name="group_tipo" string="Tipo de visita"
                             context="{'group_by': 'tipo_visita_id'}"/>
+                    <filter name="group_rubro" string="Rubro"
+                            context="{'group_by': 'rubro_ids'}"/>
                     <filter name="group_cliente" string="Cliente"
                             context="{'group_by': 'cliente_id'}"/>
                     <filter name="group_mes" string="Mes"

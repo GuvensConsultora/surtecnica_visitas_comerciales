@@ -28,6 +28,12 @@
               action="action_zonas_comerciales"
               sequence="30"/>
 
+    <menuitem id="menu_visita_rubros"
+              name="Rubros de visita"
+              parent="crm.crm_menu_config"
+              action="action_visita_rubros"
+              sequence="32"/>
+
     <menuitem id="menu_meta_visitas"
               name="Metas de visitas"
               parent="crm.crm_menu_config"

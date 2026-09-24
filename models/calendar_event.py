@@ -37,6 +37,15 @@ class CalendarEvent(models.Model):
         default=lambda self: self._default_tipo_visita_id(),
         help="Reunión, Contacto, Llamado o Video llamada.",
     )
+    rubro_ids = fields.Many2many(
+        "surtecnica.visita.rubro",
+        "surtecnica_visita_rubro_rel",
+        "event_id",
+        "rubro_id",
+        string="Rubro",
+        help="Etiquetas de la visita (proyecto, importante, proveedor…). Las define el "
+        "equipo comercial y sirven para filtrar y agrupar los gráficos.",
+    )
 
     @api.model
     def _default_tipo_visita_id(self):

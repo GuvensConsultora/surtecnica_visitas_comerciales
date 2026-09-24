@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_visita_rubro_tree" model="ir.ui.view">
+        <field name="name">surtecnica.visita.rubro.tree</field>
+        <field name="model">surtecnica.visita.rubro</field>
+        <field name="arch" type="xml">
+            <!-- editable: la lista la arma el equipo comercial y tiene que ser rápido sumar uno. -->
+            <tree string="Rubros de visita" editable="bottom">
+                <field name="name"/>
+                <field name="color" widget="color_picker"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_visita_rubro_search" model="ir.ui.view">
+        <field name="name">surtecnica.visita.rubro.search</field>
+        <field name="model">surtecnica.visita.rubro</field>
+        <field name="arch" type="xml">
+            <search string="Rubros de visita">
+                <field name="name"/>
+                <filter name="archivados" string="Archivados" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_visita_rubros" model="ir.actions.act_window">
+        <field name="name">Rubros de visita</field>
+        <field name="res_model">surtecnica.visita.rubro</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Cargá el primer rubro</p>
+            <p>Etiquetas para marcar las visitas: proyecto, importante, proveedor…
+               También se pueden crear directamente desde la visita.</p>
+        </field>
+    </record>
+
+</odoo>
