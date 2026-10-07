@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_visita_etiqueta_tree" model="ir.ui.view">
+        <field name="name">surtecnica.visita.etiqueta.tree</field>
+        <field name="model">surtecnica.visita.etiqueta</field>
+        <field name="arch" type="xml">
+            <!-- editable: la lista la arma el equipo comercial y tiene que ser rápido sumar uno. -->
+            <tree string="Etiquetas de visita" editable="bottom">
+                <field name="name"/>
+                <field name="color" widget="color_picker"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_visita_etiqueta_search" model="ir.ui.view">
+        <field name="name">surtecnica.visita.etiqueta.search</field>
+        <field name="model">surtecnica.visita.etiqueta</field>
+        <field name="arch" type="xml">
+            <search string="Etiquetas de visita">
+                <field name="name"/>
+                <filter name="archivados" string="Archivados" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_visita_etiquetas" model="ir.actions.act_window">
+        <field name="name">Etiquetas de visita</field>
+        <field name="res_model">surtecnica.visita.etiqueta</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Cargá la primera etiqueta</p>
+            <p>Etiquetas para marcar las visitas: proyecto, importante, proveedor…
+               También se pueden crear directamente desde la visita.</p>
+        </field>
+    </record>
+
+</odoo>

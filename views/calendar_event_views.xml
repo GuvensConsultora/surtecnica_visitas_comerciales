@@ -27,9 +27,11 @@
                                    string="Fecha"/>
                             <field name="duration" widget="float_time"/>
                             <field name="user_id" string="Comercial"/>
-                            <!-- Rubro en lugar de Oportunidad (pedido de comercial, 24/09/2026).
-                                 Se pueden crear rubros desde acá, sin ir a configuración. -->
-                            <field name="rubro_ids"
+                            <!-- Rubro y, debajo, Etiqueta (pedido de comercial, 28/09/2026).
+                                 Rubro sale de la lista predeterminada; las etiquetas se
+                                 pueden crear desde acá, sin ir a configuración. -->
+                            <field name="rubro_id" options="{'no_create_edit': True}"/>
+                            <field name="etiqueta_ids"
                                    widget="many2many_tags"
                                    options="{'color_field': 'color'}"/>
                         </group>
@@ -53,7 +55,8 @@
                 <field name="cliente_id"/>
                 <field name="zona_comercial_id"/>
                 <field name="tipo_visita_id"/>
-                <field name="rubro_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                <field name="rubro_id"/>
+                <field name="etiqueta_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                 <field name="description" string="Observaciones" optional="show"/>
                 <field name="es_visita_comercial" column_invisible="1"/>
             </tree>
@@ -93,7 +96,8 @@
                 <field name="user_id" string="Comercial"/>
                 <field name="zona_comercial_id"/>
                 <field name="tipo_visita_id"/>
-                <field name="rubro_ids"/>
+                <field name="rubro_id"/>
+                <field name="etiqueta_ids"/>
                 <filter name="mis_visitas" string="Mis visitas"
                         domain="[('user_id', '=', uid)]"/>
                 <separator/>
@@ -112,7 +116,9 @@
                     <filter name="group_tipo" string="Tipo de visita"
                             context="{'group_by': 'tipo_visita_id'}"/>
                     <filter name="group_rubro" string="Rubro"
-                            context="{'group_by': 'rubro_ids'}"/>
+                            context="{'group_by': 'rubro_id'}"/>
+                    <filter name="group_etiqueta" string="Etiqueta"
+                            context="{'group_by': 'etiqueta_ids'}"/>
                     <filter name="group_cliente" string="Cliente"
                             context="{'group_by': 'cliente_id'}"/>
                     <filter name="group_mes" string="Mes"

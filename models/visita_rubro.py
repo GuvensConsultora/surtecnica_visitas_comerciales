@@ -3,12 +3,13 @@ from odoo.exceptions import ValidationError
 
 
 class VisitaRubro(models.Model):
-    """Etiquetas propias de la visita comercial: proyecto, importante, proveedor que entra en
-    la cotización, lo que defina el equipo comercial.
+    """Rubro del cliente visitado (agro, bodega, ingeniería…): una lista predeterminada que
+    arma el equipo comercial, y el vendedor elige uno en cada visita.
 
-    Por qué un catálogo propio y no las etiquetas de contacto: esas describen al cliente
-    (su industria) y las usan otros circuitos, como el pañol; éstas describen la visita.
-    Mezclarlas contamina los dos filtros. Pedido de comercial del 24/09/2026.
+    Por qué un catálogo propio y no las etiquetas de contacto: ésas las usan otros
+    circuitos, como el pañol, y mezclarlas contamina los dos filtros. Pedido de comercial
+    del 28/09/2026: el rubro lo elige el vendedor en la visita (29/09); las etiquetas
+    libres van aparte, en ``surtecnica.visita.etiqueta``.
     """
 
     _name = "surtecnica.visita.rubro"

@@ -6,3 +6,5 @@ access_meta_visitas_manager,surtecnica.meta.visitas.manager,model_surtecnica_met
 access_visita_resumen_user,surtecnica.visita.resumen.user,model_surtecnica_visita_resumen,base.group_user,1,0,0,0
 access_visita_rubro_user,surtecnica.visita.rubro.user,model_surtecnica_visita_rubro,base.group_user,1,1,1,0
 access_visita_rubro_manager,surtecnica.visita.rubro.manager,model_surtecnica_visita_rubro,sales_team.group_sale_manager,1,1,1,1
+access_visita_etiqueta_user,surtecnica.visita.etiqueta.user,model_surtecnica_visita_etiqueta,base.group_user,1,1,1,0
+access_visita_etiqueta_manager,surtecnica.visita.etiqueta.manager,model_surtecnica_visita_etiqueta,sales_team.group_sale_manager,1,1,1,1

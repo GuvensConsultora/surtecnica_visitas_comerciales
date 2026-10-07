@@ -1,0 +1,39 @@
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
+
+
+class VisitaEtiqueta(models.Model):
+    """Etiquetas libres de la visita: proyecto, importante, proveedor que entra en la
+    cotización, lo que defina el equipo comercial. Varias por visita.
+
+    Antes (24/09) esto se llamaba Rubro; el 28/09 comercial separó los dos conceptos:
+    Rubro es el del cliente (``surtecnica.visita.rubro``) y Etiqueta es esto.
+    """
+
+    _name = "surtecnica.visita.etiqueta"
+    _description = "Etiqueta de visita comercial"
+    _order = "name"
+
+    name = fields.Char(string="Etiqueta", required=True, translate=False)
+    color = fields.Integer(string="Color")
+    active = fields.Boolean(string="Activo", default=True)
+
+    _sql_constraints = [
+        ("name_uniq", "unique (name)", "Ya existe una etiqueta con ese nombre."),
+    ]
+
+    @api.constrains("name")
+    def _check_name(self):
+        # El unique de SQL distingue mayúsculas: sin este control conviven "Importante" e
+        # "importante", que es justo lo que pasó con las etiquetas de contacto.
+        for registro in self:
+            nombre = (registro.name or "").strip()
+            if not nombre:
+                raise ValidationError(_("La etiqueta necesita un nombre."))
+            repetido = self.with_context(active_test=False).search(
+                [("id", "!=", registro.id), ("name", "=ilike", nombre)], limit=1
+            )
+            if repetido:
+                raise ValidationError(
+                    _("Ya existe la etiqueta «%s». Usá ésa en vez de crear otra.") % repetido.name
+                )

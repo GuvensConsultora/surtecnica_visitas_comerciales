@@ -34,6 +34,12 @@
               action="action_visita_rubros"
               sequence="32"/>
 
+    <menuitem id="menu_visita_etiquetas"
+              name="Etiquetas de visita"
+              parent="crm.crm_menu_config"
+              action="action_visita_etiquetas"
+              sequence="33"/>
+
     <menuitem id="menu_meta_visitas"
               name="Metas de visitas"
               parent="crm.crm_menu_config"

@@ -37,14 +37,21 @@ class CalendarEvent(models.Model):
         default=lambda self: self._default_tipo_visita_id(),
         help="Reunión, Contacto, Llamado o Video llamada.",
     )
-    rubro_ids = fields.Many2many(
+    rubro_id = fields.Many2one(
         "surtecnica.visita.rubro",
-        "surtecnica_visita_rubro_rel",
-        "event_id",
-        "rubro_id",
         string="Rubro",
+        index=True,
+        help="Rubro del cliente visitado. Lo elige el vendedor en cada visita de la lista "
+        "que arma el equipo comercial (CRM › Configuración › Rubros de visita).",
+    )
+    etiqueta_ids = fields.Many2many(
+        "surtecnica.visita.etiqueta",
+        "surtecnica_visita_etiqueta_rel",
+        "event_id",
+        "etiqueta_id",
+        string="Etiqueta",
         help="Etiquetas de la visita (proyecto, importante, proveedor…). Las define el "
-        "equipo comercial y sirven para filtrar y agrupar los gráficos.",
+        "equipo comercial y sirven para filtrar y agrupar.",
     )
 
     @api.model
