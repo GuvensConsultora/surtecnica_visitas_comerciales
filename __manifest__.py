@@ -11,7 +11,7 @@ comerciales no se mezclen con la agenda general.
 
 El informe por comercial y mes sale de la vista pivot nativa: sin fórmulas que arrastrar.
     """,
-    "version": "17.0.1.3.0",
+    "version": "17.0.1.4.0",
     "author": "Yagüven C.G.",
     "website": "https://yaguven.com",
     "license": "LGPL-3",
@@ -29,6 +29,11 @@ El informe por comercial y mes sale de la vista pivot nativa: sin fórmulas que 
         "views/resumen_views.xml",
         "views/menu.xml",
     ],
+    "assets": {
+        "web.assets_backend": [
+            "surtecnica_visitas_comerciales/static/src/js/graph_cantidades.js",
+        ],
+    },
     "installable": True,
     "auto_install": False,
 }

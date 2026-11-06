@@ -80,7 +80,7 @@
         <field name="name">calendar.event.graph.visita.comercial</field>
         <field name="model">calendar.event</field>
         <field name="arch" type="xml">
-            <graph string="Visitas por comercial" type="bar" sample="1">
+            <graph string="Visitas por comercial" type="bar" sample="1" js_class="surtecnica_graph_cantidades">
                 <field name="user_id" type="row"/>
                 <field name="start" interval="month" type="col"/>
             </graph>

@@ -23,7 +23,7 @@
         <field name="name">surtecnica.visita.resumen.graph</field>
         <field name="model">surtecnica.visita.resumen</field>
         <field name="arch" type="xml">
-            <graph string="Visitas por comercial" type="bar" sample="1">
+            <graph string="Visitas por comercial" type="bar" sample="1" js_class="surtecnica_graph_cantidades">
                 <field name="mes" interval="month" type="row"/>
                 <field name="user_id" type="col"/>
                 <field name="cantidad" type="measure"/>
