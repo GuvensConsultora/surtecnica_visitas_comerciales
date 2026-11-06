@@ -11,7 +11,7 @@ comerciales no se mezclen con la agenda general.
 
 El informe por comercial y mes sale de la vista pivot nativa: sin fórmulas que arrastrar.
     """,
-    "version": "17.0.1.4.0",
+    "version": "17.0.1.4.1",
     "author": "Yagüven C.G.",
     "website": "https://yaguven.com",
     "license": "LGPL-3",

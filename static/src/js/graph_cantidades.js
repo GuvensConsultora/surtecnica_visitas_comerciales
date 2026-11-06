@@ -81,6 +81,11 @@ export class GraphRendererCantidades extends GraphRenderer {
         const options = config.options;
         // Lugar arriba para que el número de la barra más alta no quede cortado.
         options.layout = { ...(options.layout || {}), padding: { top: 20 } };
+        // El eje termina justo en la barra más alta: se le da aire para que el
+        // número no quede debajo de la leyenda.
+        if (options.scales && options.scales.y) {
+            options.scales.y.grace = "10%";
+        }
         options.plugins = {
             ...options.plugins,
             surtecnica_cantidades: {
